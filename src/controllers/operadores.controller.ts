@@ -7,31 +7,34 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { OperadoresService } from 'src/services/operadores.service';
 
 @Controller('operadores')
 export class OperadoresController {
+  constructor(private operadorService: OperadoresService) {}
+
   @Get()
   getAll() {
-    return 'Obteniendo todos los operadores';
+    return this.operadorService.getAll();
   }
 
   @Get(':id')
   getOne(@Param('id') id: string) {
-    return `Obteniendo el operador con ID: ${id}`;
+    return this.operadorService.getOne(id);
   }
 
   @Post()
   create(@Body() createOperadorDto: any) {
-    return 'Operador creado';
+    return this.operadorService.create(createOperadorDto);
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateOperadorDto: any) {
-    return `Actualizando el operador con ID: ${id}`;
+    return this.operadorService.update(id, updateOperadorDto);
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return `Eliminando el operador con ID: ${id}`;
+    return this.operadorService.delete(id);
   }
 }
