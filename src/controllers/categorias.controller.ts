@@ -7,36 +7,34 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { CategoriasService } from 'src/services/categorias.service';
 
 @Controller('categorias')
 export class CategoriasController {
+  constructor(private categoriaService: CategoriasService) {}
+
   @Get()
   getAll() {
-    // Lógica para obtener todas las categorías
-    return 'Obteniendo todas las categorías';
+    return this.categoriaService.getAll();
   }
 
   @Get(':id')
   getOne(@Param('id') id: string) {
-    // Lógica para obtener una categoría por ID
-    return `Obteniendo la categoría con ID: ${id}`;
+    return this.categoriaService.getOne(id);
   }
 
   @Post()
   create(@Body() createCategoriaDto: any) {
-    // Lógica para crear una nueva categoría
-    return 'Categoría creada';
+    return this.categoriaService.create(createCategoriaDto);
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateCategoriaDto: any) {
-    // Lógica para actualizar una categoría por ID
-    return `Actualizando la categoría con ID: ${id}`;
+    return this.categoriaService.update(id, updateCategoriaDto);
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    // Lógica para eliminar una categoría por ID
-    return `Eliminando la categoría con ID: ${id}`;
+    return this.categoriaService.delete(id);
   }
 }

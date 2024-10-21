@@ -7,31 +7,34 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { PedidosService } from 'src/services/pedidos.service';
 
 @Controller('pedidos')
 export class PedidosController {
+  constructor(private pedidoService: PedidosService) {}
+
   @Get()
   getAll() {
-    return 'Obteniendo todos los pedidos';
+    return this.pedidoService.getAll();
   }
 
   @Get(':id')
   getOne(@Param('id') id: string) {
-    return `Obteniendo el pedido con ID: ${id}`;
+    return this.pedidoService.getOne(id);
   }
 
   @Post()
   create(@Body() createPedidoDto: any) {
-    return 'Pedido creado';
+    return this.pedidoService.create(createPedidoDto);
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updatePedidoDto: any) {
-    return `Actualizando el pedido con ID: ${id}`;
+    return this.pedidoService.update(id, updatePedidoDto);
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return `Eliminando el pedido con ID: ${id}`;
+    return this.pedidoService.delete(id);
   }
 }

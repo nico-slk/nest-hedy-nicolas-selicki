@@ -7,31 +7,34 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { FabricantesService } from 'src/services/fabricantes.service';
 
 @Controller('fabricantes')
 export class FabricantesController {
+  constructor(private fabricanteService: FabricantesService) {}
+
   @Get()
   getAll() {
-    return 'Obteniendo todos los fabricantes';
+    return this.fabricanteService.getAll();
   }
 
   @Get(':id')
   getOne(@Param('id') id: string) {
-    return `Obteniendo el fabricante con ID: ${id}`;
+    return this.fabricanteService.getOne(id);
   }
 
   @Post()
   create(@Body() createFabricanteDto: any) {
-    return 'Fabricante creado';
+    return this.fabricanteService.create(createFabricanteDto);
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateFabricanteDto: any) {
-    return `Actualizando el fabricante con ID: ${id}`;
+    return this.fabricanteService.update(id, updateFabricanteDto);
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return `Eliminando el fabricante con ID: ${id}`;
+    return this.fabricanteService.delete(id);
   }
 }
